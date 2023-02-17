@@ -45,6 +45,7 @@ public interface JpaConst {
     String ENTITY_COM = "comment"; //コメント
 
     //JPQL内パラメータ
+    String JPQL_PARM_NAME = "name"; //名前
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_POST = "post"; //利用者
 
@@ -55,6 +56,14 @@ public interface JpaConst {
     //全ての利用者の件数を取得する
     String Q_POS_COUNT = ENTITY_POS + ".count";
     String Q_POS_COUNT_DEF = "SELECT COUNT(e) FROM Post AS e";
+    //名前とハッシュ化済パスワードを条件に利用者を取得する
+    String Q_POS_GET_BY_NAME_AND_PASS = ENTITY_POS + ".getByNameAndPass";
+    String Q_POS_GET_BY_NAME_AND_PASS_DEF = "SELECT e FROM Post AS e WHERE e.name = :" + JPQL_PARM_NAME + " AND e.password = :" + JPQL_PARM_PASSWORD;
+
+  //指定した社員番号を保持する従業員の件数を取得する
+    String Q_POS_COUNT_REGISTERED_BY_NAME = ENTITY_POS + ".countRegisteredByNmae";
+    String Q_POS_COUNT_REGISTERED_BY_NAME_DEF = "SELECT COUNT(e) FROM Post AS e WHERE e.name = :" + JPQL_PARM_NAME;
+
     //全てのトピックをidの降順に取得する
     String Q_TOP_GET_ALL = ENTITY_TOP + ".getAll";
     String Q_TOP_GET_ALL_DEF = "SELECT r FROM Topic AS r ORDER BY r.id DESC";
