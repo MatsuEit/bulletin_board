@@ -73,10 +73,10 @@ public class PostService extends ServiceBase {
     public long countByName(String name) {
 
         //指定した利用者の件数を取得する
-        long employees_count = (long) em.createNamedQuery(JpaConst.Q_POS_COUNT_REGISTERED_BY_NAME, Long.class)
+        long posts_count = (long) em.createNamedQuery(JpaConst.Q_POS_COUNT_REGISTERED_BY_NAME, Long.class)
                 .setParameter(JpaConst.JPQL_PARM_NAME, name)
                 .getSingleResult();
-        return employees_count;
+        return posts_count;
     }
 
     /**

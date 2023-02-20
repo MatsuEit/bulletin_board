@@ -9,7 +9,7 @@ public enum ForwardConst {
     //action
     ACT("action"),
     ACT_TOP("Top"),
-    ACT_EMP("Employee"),
+    ACT_POS("Post"),
     ACT_REP("Report"),
     ACT_AUTH("Auth"),
 
@@ -31,10 +31,11 @@ public enum ForwardConst {
     FW_ERR_UNKNOWN("error/unknown"),
     FW_TOP_INDEX("topPage/index"),
     FW_LOGIN("login/login"),
-    FW_EMP_INDEX("employees/index"),
-    FW_EMP_SHOW("employees/show"),
-    FW_EMP_NEW("employees/new"),
-    FW_EMP_EDIT("employees/edit"),
+    FW_POS_INDEX("posts/index"),
+    FW_POS_SHOW("posts/show"),
+    FW_POS_NEW("posts/new"),
+    FW_POS_EDIT("posts/edit"),
+
     FW_REP_INDEX("reports/index"),
     FW_REP_SHOW("reports/show"),
     FW_REP_NEW("reports/new"),

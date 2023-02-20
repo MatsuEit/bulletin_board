@@ -4,7 +4,7 @@
 <%@ page import="constants.AttributeConst" %>
 
 <c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
-<c:set var="actEmp" value="${ForwardConst.ACT_EMP.getValue()}" />
+<c:set var="actPos" value="${ForwardConst.ACT_POS.getValue()}" />
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="actAuth" value="${ForwardConst.ACT_AUTH.getValue()}" />
 
@@ -26,7 +26,7 @@
                 <h1><a href="<c:url value='/?action=${actTop}&command=${commIdx}' />">掲示板</a></h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_employee != null}">
                     <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}">
-                        <a href="<c:url value='?action=${actEmp}&command=${commIdx}' />">利用者管理</a>&nbsp;
+                        <a href="<c:url value='?action=${actPos}&command=${commIdx}' />">利用者管理</a>&nbsp;
                     </c:if>
                     <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">掲示板</a>&nbsp;
                 </c:if>
