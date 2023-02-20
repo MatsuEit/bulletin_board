@@ -42,7 +42,7 @@ public class PostService extends ServiceBase {
             //パスワードのハッシュ化
             String pass = EncryptUtil.getPasswordEncrypt(plainPass, pepper);
 
-            //社員番号とハッシュ化済パスワードを条件に未削除の従業員を1件取得する
+            //名前とハッシュ化済パスワードを条件に利用者を1件取得する
             e = em.createNamedQuery(JpaConst.Q_POS_GET_BY_NAME_AND_PASS, Post.class)
                     .setParameter(JpaConst.JPQL_PARM_POST, name)
                     .setParameter(JpaConst.JPQL_PARM_PASSWORD, pass)

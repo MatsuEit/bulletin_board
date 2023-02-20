@@ -13,7 +13,7 @@ import constants.PropertyConst;
 import services.PostService;
 
 /**
- * 従業員に関わる処理を行うActionクラス
+ * 利用者に関わる処理を行うActionクラス
  *
  */
 public class PostAction extends ActionBase {
@@ -35,27 +35,26 @@ public class PostAction extends ActionBase {
     }
 
     /**
-     * 一覧画面を表示する
+     * 詳細画面を表示する
      * @throws ServletException
      * @throws IOException
      */
     public void index() throws ServletException, IOException {
 
-        //指定されたページ数の一覧画面に表示するデータを取得
-        int page = getPage();
-        List<PostView> posts = service.getPerPage(page);
+        //idを条件に従業員データを取得する
+        PostView ev = service.findOne(toNumber(getRequestParam(AttributeConst.POS_ID)));
 
+        if (ev == null ) {
 
-        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
-        String flush = getSessionScope(AttributeConst.FLUSH);
-        if (flush != null) {
-            putRequestScope(AttributeConst.FLUSH, flush);
-            removeSessionScope(AttributeConst.FLUSH);
+            //データが取得できなかった場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+            return;
         }
 
-        //一覧画面を表示
-        forward(ForwardConst.FW_POS_INDEX);
+        putRequestScope(AttributeConst.POST, ev); //取得した利用者情報
 
+        //詳細画面を表示
+        forward(ForwardConst.FW_POS_INDEX);
     }
 
     /**

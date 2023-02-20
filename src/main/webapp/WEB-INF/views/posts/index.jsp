@@ -4,7 +4,6 @@
 <%@ page import="constants.ForwardConst" %>
 
 <c:set var="actPos" value="${ForwardConst.ACT_POS.getValue()}" />
-<c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 
@@ -17,6 +16,5 @@
         </c:if>
         <h2>あなたのプロフィール</h2>
 <td><c:out value="${post.name}" /></td>
- <a href="<c:url value='?action=${actEmp}&command=${commShow}&id=${employee.id}' />">詳細を見る</a>
     </c:param>
 </c:import>
