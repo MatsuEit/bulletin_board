@@ -36,10 +36,10 @@ public enum ForwardConst {
     FW_POS_NEW("posts/new"),
     FW_POS_EDIT("posts/edit"),
 
-    FW_REP_INDEX("reports/index"),
-    FW_REP_SHOW("reports/show"),
-    FW_REP_NEW("reports/new"),
-    FW_REP_EDIT("reports/edit");
+    FW_REP_INDEX("topics/index"),
+    FW_REP_SHOW("topics/show"),
+    FW_REP_NEW("topics/new"),
+    FW_REP_EDIT("topics/edit");
 
     /**
      * 文字列

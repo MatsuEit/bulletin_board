@@ -21,11 +21,11 @@ public class TopicService extends ServiceBase {
      */
     public List<TopicView> getAllPerPage(int page) {
 
-        List<Topic> reports = em.createNamedQuery(JpaConst.Q_TOP_GET_ALL, Topic.class)
+        List<Topic> topics = em.createNamedQuery(JpaConst.Q_TOP_GET_ALL, Topic.class)
                 .setFirstResult(JpaConst.ROW_PER_PAGE_TOPIC * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE_TOPIC)
                 .getResultList();
-        return TopicConverter.toViewList(reports);
+        return TopicConverter.toViewList(topics);
     }
 
     /**
@@ -33,9 +33,9 @@ public class TopicService extends ServiceBase {
      * @return データの件数
      */
     public long countAll() {
-        long reports_count = (long) em.createNamedQuery(JpaConst.Q_TOP_COUNT, Long.class)
+        long topics_count = (long) em.createNamedQuery(JpaConst.Q_TOP_COUNT, Long.class)
                 .getSingleResult();
-        return reports_count;
+        return topics_count;
     }
 
     /**

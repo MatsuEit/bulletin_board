@@ -112,3 +112,24 @@ button {
 h1 a {
     color: #eeeeee;
 }
+
+table#topic_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#topic_list .topic_name {
+    width: 20%;
+    padding: 10px 2%;
+}
+table#topic_list .topic_date {
+    width: 20%;
+}
+
+table#topic_list .topic_title {
+    width: 37%;
+}
+
+table#topic_list .topic_action {
+    width: 13%;
+}
