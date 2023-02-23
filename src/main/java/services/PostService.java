@@ -44,7 +44,7 @@ public class PostService extends ServiceBase {
 
             //名前とハッシュ化済パスワードを条件に利用者を1件取得する
             e = em.createNamedQuery(JpaConst.Q_POS_GET_BY_NAME_AND_PASS, Post.class)
-                    .setParameter(JpaConst.JPQL_PARM_POST, name)
+                    .setParameter(JpaConst.JPQL_PARM_NAME, name)
                     .setParameter(JpaConst.JPQL_PARM_PASSWORD, pass)
                     .getSingleResult();
 
@@ -105,6 +105,30 @@ public class PostService extends ServiceBase {
 
         //エラーを返却（エラーがなければ0件の空リスト）
         return errors;
+    }
+
+    /**
+     * 名前とパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
+     * @param name 名前
+     * @param plainPass パスワード
+     * @param pepper pepper文字列
+     * @return 認証結果を返却す(成功:true 失敗:false)
+     */
+    public Boolean validateLogin(String name, String plainPass, String pepper) {
+
+        boolean isValidPost = false;
+        if (name != null && !name.equals("") && plainPass != null && !plainPass.equals("")) {
+            PostView ev = findOne(name, plainPass, pepper);
+
+            if (ev != null && ev.getId() != null) {
+
+                //データが取得できた場合、認証成功
+                isValidPost = true;
+            }
+        }
+
+        //認証結果を返却する
+        return isValidPost;
     }
 
     /**

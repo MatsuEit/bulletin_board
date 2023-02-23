@@ -29,6 +29,9 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_POS_COUNT,
             query = JpaConst.Q_POS_COUNT_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_POS_GET_BY_NAME_AND_PASS,
+            query = JpaConst.Q_POS_GET_BY_NAME_AND_PASS_DEF)
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -49,7 +52,7 @@ public class Post {
     /**
      * 名前
      */
-    @Column(name = JpaConst.POS_COL_NAME, nullable = false, unique = true)
+    @Column(name = JpaConst.POS_COL_NAME, nullable = false)
     private String name;
 
     /**

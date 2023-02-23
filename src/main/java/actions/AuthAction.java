@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import actions.views.PostView;
 import constants.AttributeConst;
 import constants.ForwardConst;
+import constants.MessageConst;
+import constants.PropertyConst;
 import services.PostService;
 
 /**
@@ -49,6 +52,50 @@ public class AuthAction extends ActionBase {
 
         //ログイン画面を表示
         forward(ForwardConst.FW_LOGIN);
+    }
+
+    /**
+     * ログイン処理を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void login() throws ServletException, IOException {
+
+        String name = getRequestParam(AttributeConst.POS_NAME);
+        String plainPass = getRequestParam(AttributeConst.POS_PASS);
+        String pepper = getContextScope(PropertyConst.PEPPER);
+
+        //有効な利用者か認証する
+        Boolean isValidPost = service.validateLogin(name, plainPass, pepper);
+
+        if (isValidPost) {
+            //認証成功の場合
+
+            //CSRF対策 tokenのチェック
+            if (checkToken()) {
+
+                //ログインした利用者のDBデータを取得
+                PostView ev = service.findOne(name, plainPass, pepper);
+                //セッションにログインした利用者を設定
+                putSessionScope(AttributeConst.LOGIN_POS, ev);
+                //セッションにログイン完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGINED.getMessage());
+                //トップページへリダイレクト
+                redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
+            }
+        } else {
+            //認証失敗の場合
+
+            //CSRF対策用トークンを設定
+            putRequestScope(AttributeConst.TOKEN, getTokenId());
+            //認証失敗エラーメッセージ表示フラグをたてる
+            putRequestScope(AttributeConst.LOGIN_ERR, true);
+            //入力された従業員コードを設定
+            putRequestScope(AttributeConst.POS_NAME, name);
+
+            //ログイン画面を表示
+            forward(ForwardConst.FW_LOGIN);
+        }
     }
 
 }
