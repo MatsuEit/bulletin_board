@@ -24,16 +24,10 @@
         <div id="header">
             <div id="header_menu">
                 <h1><a href="<c:url value='/?action=${actTop}&command=${commIdx}' />">掲示板</a></h1>&nbsp;&nbsp;&nbsp;
-                <c:if test="${sessionScope.login_employee != null}">
-                    <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}">
-                        <a href="<c:url value='?action=${actPos}&command=${commIdx}' />">利用者管理</a>&nbsp;
-                    </c:if>
-                    <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">掲示板</a>&nbsp;
-                </c:if>
-            </div>
-            <c:if test="${sessionScope.login_employee != null}">
-                <div id="employee_name">
-                    <c:out value="${sessionScope.login_employee.name}" />
+                 </div>
+            <c:if test="${sessionScope.login_post != null}">
+                <div id="post_name">
+                    <c:out value="${sessionScope.login_post.name}" />
                     &nbsp;さん&nbsp;&nbsp;&nbsp;
                     <a href="<c:url value='?action=${actAuth}&command=${commOut}' />">ログアウト</a>
                 </div>
