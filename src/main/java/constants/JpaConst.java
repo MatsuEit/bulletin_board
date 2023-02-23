@@ -47,6 +47,7 @@ public interface JpaConst {
     //JPQL内パラメータ
     String JPQL_PARM_NAME = "name"; //名前
     String JPQL_PARM_PASSWORD = "password"; //パスワード
+    String JPQL_PARM_POST = "post"; //
 
     //NamedQueryの nameとquery
     //全ての利用者をidの降順に取得する
