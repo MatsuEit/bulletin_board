@@ -49,7 +49,7 @@ public class Topic {
     private Integer id;
 
     /**
-     * トピックを投稿した利用者のID
+     * トピックを投稿した利用者
      */
     @ManyToOne
     @JoinColumn(name = JpaConst.TOP_COL_POS, nullable = false)

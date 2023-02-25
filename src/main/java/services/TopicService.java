@@ -79,7 +79,8 @@ public class TopicService extends ServiceBase {
      */
     private void createInternal(TopicView rv) {
         em.getTransaction().begin();
-        em.persist(TopicConverter.toModel(rv));
+        Topic t = TopicConverter.toModel(rv);
+        em.persist(t);
         em.getTransaction().commit();
     }
 
