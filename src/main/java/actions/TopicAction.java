@@ -71,6 +71,9 @@ public class TopicAction extends ActionBase {
      */
     public void create() throws ServletException, IOException {
 
+        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+        putRequestScope(AttributeConst.POST, new PostView()); //空の利用者インスタンス
+
         //CSRF対策 tokenのチェック
         if (checkToken()) {
 

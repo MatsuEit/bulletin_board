@@ -58,6 +58,9 @@ public class TopAction extends ActionBase {
 
         //CSRF対策 tokenのチェック
         if (checkToken()) {
+            //CSRF対策用トークンを設定
+            putRequestScope(AttributeConst.TOKEN, getTokenId());
+            putRequestScope(AttributeConst.POST, new PostView()); //空の利用者インスタンス
 
             //セッションからログイン中の利用者情報を取得
             PostView ev = (PostView) getSessionScope(AttributeConst.LOGIN_POS);

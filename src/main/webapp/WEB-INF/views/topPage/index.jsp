@@ -34,7 +34,6 @@
                 </c:forEach>
             </tbody>
         </table>
-
         <form method="POST" action="<c:url value='?action=${action}&command=${commCrt}' />">
             <c:import url="_form.jsp" />
         </form>

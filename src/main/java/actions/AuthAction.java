@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 
 import actions.views.PostView;
+import actions.views.TopicView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.MessageConst;
@@ -65,6 +66,7 @@ public class AuthAction extends ActionBase {
         String plainPass = getRequestParam(AttributeConst.POS_PASS);
         String pepper = getContextScope(PropertyConst.PEPPER);
 
+
         //有効な利用者か認証する
         Boolean isValidPost = service.validateLogin(name, plainPass, pepper);
 
@@ -73,6 +75,12 @@ public class AuthAction extends ActionBase {
 
             //CSRF対策 tokenのチェック
             if (checkToken()) {
+                //CSRF対策用トークンを設定
+                putRequestScope(AttributeConst.TOKEN, getTokenId());
+                putRequestScope(AttributeConst.TOPIC, new TopicView()); //空のトピックインスタンス
+//                System.out.println("----------------------------------------");
+//                System.out.println("token=" + ${_token});
+//                System.out.println("----------------------------------------");
 
                 //ログインした利用者のDBデータを取得
                 PostView ev = service.findOne(name, plainPass, pepper);
@@ -90,7 +98,7 @@ public class AuthAction extends ActionBase {
             putRequestScope(AttributeConst.TOKEN, getTokenId());
             //認証失敗エラーメッセージ表示フラグをたてる
             putRequestScope(AttributeConst.LOGIN_ERR, true);
-            //入力された従業員コードを設定
+            //入力された利用名を設定
             putRequestScope(AttributeConst.POS_NAME, name);
 
             //ログイン画面を表示
@@ -105,7 +113,7 @@ public class AuthAction extends ActionBase {
      */
     public void logout() throws ServletException, IOException {
 
-        //セッションからログイン従業員のパラメータを削除
+        //セッションからログイン利用者のパラメータを削除
         removeSessionScope(AttributeConst.LOGIN_POS);
 
         //セッションにログアウト時のフラッシュメッセージを追加

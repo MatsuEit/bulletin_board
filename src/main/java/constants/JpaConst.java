@@ -60,7 +60,7 @@ public interface JpaConst {
     String Q_POS_GET_BY_NAME_AND_PASS = ENTITY_POS + ".getByNameAndPass";
     String Q_POS_GET_BY_NAME_AND_PASS_DEF = "SELECT e FROM Post AS e WHERE e.name = :" + JPQL_PARM_NAME + " AND e.password = :" + JPQL_PARM_PASSWORD;
 
-    //指定した社員番号を保持する従業員の件数を取得する
+    //指定した社員番号を保持する利用者の件数を取得する
     String Q_POS_COUNT_REGISTERED_BY_NAME = ENTITY_POS + ".countRegisteredByNmae";
     String Q_POS_COUNT_REGISTERED_BY_NAME_DEF = "SELECT COUNT(e) FROM Post AS e WHERE e.name = :" + JPQL_PARM_NAME;
 
