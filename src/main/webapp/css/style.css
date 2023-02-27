@@ -105,6 +105,14 @@ button {
     display: inline-block;
 }
 
+#post_new {
+    color: #cccccc;
+    width: 36%;
+    padding-right: 3%;
+    text-align: right;
+    display: inline-block;
+}
+
 #header a {
     color: #eeeeee;
 }
