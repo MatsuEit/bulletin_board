@@ -13,7 +13,7 @@ import models.validators.PostValidator;
 import utils.EncryptUtil;
 
 /**
- * 従業員テーブルの操作に関わる処理を行うクラス
+ * 利用者テーブルの操作に関わる処理を行うクラス
  */
 public class PostService extends ServiceBase {
 
@@ -80,8 +80,8 @@ public class PostService extends ServiceBase {
     }
 
     /**
-     * 画面から入力された従業員の登録内容を元にデータを1件作成し、従業員テーブルに登録する
-     * @param ev 画面から入力された従業員の登録内容
+     * 画面から入力された利用者の登録内容を元にデータを1件作成し、利用者テーブルに登録する
+     * @param ev 画面から入力された利用者の登録内容
      * @param pepper pepper文字列
      * @return バリデーションや登録処理中に発生したエラーのリスト
      */

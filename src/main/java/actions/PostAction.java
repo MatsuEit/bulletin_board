@@ -41,7 +41,7 @@ public class PostAction extends ActionBase {
      */
     public void index() throws ServletException, IOException {
 
-        //idを条件に従業員データを取得する
+        //idを条件に利用者データを取得する
         PostView ev = service.findOne(toNumber(getRequestParam(AttributeConst.POS_ID)));
 
         if (ev == null ) {
@@ -65,7 +65,7 @@ public class PostAction extends ActionBase {
     public void entryNew() throws ServletException, IOException {
 
         putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-        putRequestScope(AttributeConst.POST, new PostView()); //空の従業員インスタンス
+        putRequestScope(AttributeConst.POST, new PostView()); //空の利用者インスタンス
 
         //新規登録画面を表示
         forward(ForwardConst.FW_POS_NEW);
@@ -81,7 +81,7 @@ public class PostAction extends ActionBase {
         //CSRF対策 tokenのチェック
         if (checkToken()) {
 
-            //パラメータの値を元に従業員情報のインスタンスを作成する
+            //パラメータの値を元に利用者情報のインスタンスを作成する
             PostView ev = new PostView(
                     null,
                     getRequestParam(AttributeConst.POS_NAME),
@@ -91,7 +91,7 @@ public class PostAction extends ActionBase {
             //アプリケーションスコープからpepper文字列を取得
             String pepper = getContextScope(PropertyConst.PEPPER);
 
-            //従業員情報登録
+            //利用者情報登録
             List<String> errors = service.create(ev, pepper);
 
             if (errors.size() > 0) {

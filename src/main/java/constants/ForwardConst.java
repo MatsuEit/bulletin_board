@@ -31,14 +31,8 @@ public enum ForwardConst {
     FW_TOP_INDEX("topPage/index"),
     FW_LOGIN("login/login"),
     FW_POS_INDEX("posts/index"),
-    FW_POS_SHOW("posts/show"),
-    FW_POS_NEW("posts/new"),
-    FW_POS_EDIT("posts/edit"),
+    FW_POS_NEW("posts/new");
 
-    FW_REP_INDEX("topics/index"),
-    FW_REP_SHOW("topics/show"),
-    FW_REP_NEW("topics/new"),
-    FW_REP_EDIT("topics/edit");
 
     /**
      * 文字列

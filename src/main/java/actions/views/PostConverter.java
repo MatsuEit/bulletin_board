@@ -6,7 +6,7 @@ import java.util.List;
 import models.Post;
 
 /**
- * 従業員データのDTOモデル⇔Viewモデルの変換を行うクラス
+ * 利用者データのDTOモデル⇔Viewモデルの変換を行うクラス
  *
  */
 public class PostConverter {

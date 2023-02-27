@@ -8,7 +8,7 @@ import constants.MessageConst;
 import services.PostService;
 
 /**
- * 従業員インスタンスに設定されている値のバリデーションを行うクラス
+ * 利用者インスタンスに設定されている値のバリデーションを行うクラス
  *
  */
 public class PostValidator {
