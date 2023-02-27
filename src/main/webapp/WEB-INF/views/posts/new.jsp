@@ -14,6 +14,6 @@
         <form method="POST" action="<c:url value='?action=${action}&command=${commCrt}' />">
             <c:import url="_form.jsp" />
         </form>
-        <p><a href="<c:url value='?action=${actTop}&command=${commIdx}' />">トップページに戻る</a></p>
+        <p><a href="<c:url value='?action=${actTop}&command=${commIdx}' />">ログイン画面に戻る</a></p>
     </c:param>
 </c:import>
