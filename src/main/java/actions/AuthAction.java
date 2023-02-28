@@ -78,9 +78,6 @@ public class AuthAction extends ActionBase {
                 //CSRF対策用トークンを設定
                 putRequestScope(AttributeConst.TOKEN, getTokenId());
                 putRequestScope(AttributeConst.TOPIC, new TopicView()); //空のトピックインスタンス
-//                System.out.println("----------------------------------------");
-//                System.out.println("token=" + ${_token});
-//                System.out.println("----------------------------------------");
 
                 //ログインした利用者のDBデータを取得
                 PostView ev = service.findOne(name, plainPass, pepper);
@@ -88,8 +85,9 @@ public class AuthAction extends ActionBase {
                 putSessionScope(AttributeConst.LOGIN_POS, ev);
                 //セッションにログイン完了のフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGINED.getMessage());
-                //トップページへリダイレクト
-                redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
+
+                //トップページ画面を表示
+                forward(ForwardConst.FW_TOP_INDEX);
             }
         } else {
             //認証失敗の場合

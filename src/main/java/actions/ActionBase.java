@@ -111,7 +111,6 @@ public abstract class ActionBase {
 
         //URLへリダイレクト
         response.sendRedirect(redirectUrl);
-
     }
 
     /**
