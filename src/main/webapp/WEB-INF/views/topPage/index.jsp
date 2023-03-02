@@ -4,8 +4,10 @@
 <%@ page import="constants.ForwardConst" %>
 
 <c:set var="action" value="${ForwardConst.ACT_TOP.getValue()}" />
+<c:set var="actTop" value="${ForwardConst.ACT_TOPI.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
+<c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 
 <c:import url="../layout/app.jsp">
     <c:param name="content">
@@ -30,7 +32,8 @@
                 <c:forEach var="topic" items="${topics}"
                     varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="topic_title">${topic.title}</td>
+                        <td class="topic_title"><a
+                            href="<c:url value='?action=${actTop}&command=${commShow}&id=${topic.id}' />">${topic.title}</a></td>
                         <td class="topic_name"><c:out
                                 value="${topic.post.name}" /></td>
                         <fmt:parseDate value="${topic.createdAt}"

@@ -10,6 +10,7 @@ public enum ForwardConst {
     ACT("action"),
     ACT_TOP("Top"),
     ACT_POS("Post"),
+    ACT_TOPI("Topic"),
     ACT_AUTH("Auth"),
 
     //command
@@ -29,6 +30,7 @@ public enum ForwardConst {
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),
     FW_TOP_INDEX("topPage/index"),
+    FW_TOPI_SHOW("topics/show"),
     FW_LOGIN("login/login"),
     FW_POS_INDEX("posts/index"),
     FW_POS_NEW("posts/new");
