@@ -21,7 +21,7 @@ public enum MessageConst {
     E_NOPASSWORD("パスワードを入力してください。"),
     E_POS_NAME_EXIST("入力された名前は既に存在しています。"),
     E_NOTITLE("タイトルを入力してください。"),
-    E_NOCOMMENT("内容を入力してください。");
+    E_NOCOMMENT("コメント内容を入力してください。");
 
 
     /**
