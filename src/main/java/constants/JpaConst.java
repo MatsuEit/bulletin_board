@@ -36,7 +36,7 @@ public interface JpaConst {
     String COM_COL_ID = "id"; //id
     String COM_COL_POS = "post_id"; //コメントを作成した利用者のid
     String COM_COL_TOP = "topic_id"; //コメントされたトピックのid
-    String COM_COL_MSG  = "msg"; //コメントの内容
+    String COM_COL_TITLE  = "msg"; //コメントの内容
     String COM_COL_CREATED_AT = "created_at"; //作成日時
 
     //Entity名

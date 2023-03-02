@@ -27,7 +27,7 @@
                 <tr>
                     <th class="topic_title">タイトル</th>
                     <th class="topic_name">投稿者</th>
-                    <th class="topic_date">日付</th>
+                    <th class="topic_date">投稿日時</th>
                 </tr>
                 <c:forEach var="topic" items="${topics}"
                     varStatus="status">

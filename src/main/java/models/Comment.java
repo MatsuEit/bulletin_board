@@ -20,17 +20,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * トピックのDTOモデル
+ * コメントのDTOモデル
  *
  */
-@Table(name = JpaConst.TABLE_TOP)
+@Table(name = JpaConst.TABLE_COM)
 @NamedQueries({
     @NamedQuery(
-            name = JpaConst.Q_TOP_GET_ALL,
-            query = JpaConst.Q_TOP_GET_ALL_DEF),
+            name = JpaConst.Q_COM_GET_ALL,
+            query = JpaConst.Q_COM_GET_ALL_DEF),
     @NamedQuery(
-            name = JpaConst.Q_TOP_COUNT,
-            query = JpaConst.Q_TOP_COUNT_DEF),
+            name = JpaConst.Q_COM_COUNT,
+            query = JpaConst.Q_COM_COUNT_DEF),
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -38,33 +38,40 @@ import lombok.Setter;
 @NoArgsConstructor //引数なしコンストラクタを自動生成する(Lombok)
 @AllArgsConstructor //全てのクラスフィールドを引数にもつ引数ありコンストラクタを自動生成する(Lombok)
 @Entity
-public class Topic {
+public class Comment {
 
     /**
      * id
      */
     @Id
-    @Column(name = JpaConst.TOP_COL_ID)
+    @Column(name = JpaConst.COM_COL_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
-     * トピックを投稿した利用者
+     * コメントを投稿した利用者
      */
     @ManyToOne
-    @JoinColumn(name = JpaConst.TOP_COL_POS, nullable = false)
+    @JoinColumn(name = JpaConst.COM_COL_POS, nullable = false)
     private Post post;
 
     /**
-     * トピックのタイトル
+     * コメントを投稿したトピック
      */
-    @Column(name = JpaConst.TOP_COL_TITLE, length = 255, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = JpaConst.COM_COL_TOP, nullable = false)
+    private Topic topic;
+
+    /**
+     * コメントの内容
+     */
+    @Column(name = JpaConst.COM_COL_TITLE, length = 255, nullable = false)
     private String title;
 
     /**
      * 投稿日時
      */
-    @Column(name = JpaConst.TOP_COL_CREATED_AT, nullable = false)
+    @Column(name = JpaConst.COM_COL_CREATED_AT, nullable = false)
     private LocalDateTime createdAt;
 
 }

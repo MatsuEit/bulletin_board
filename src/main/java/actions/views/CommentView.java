@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter //全てのクラスフィールドについてsetterを自動生成する(Lombok)
 @NoArgsConstructor //引数なしコンストラクタを自動生成する(Lombok)
 @AllArgsConstructor //全てのクラスフィールドを引数にもつ引数ありコンストラクタを自動生成する(Lombok)
-public class TopicView {
+public class CommentView {
 
     /**
      * id
@@ -23,12 +23,17 @@ public class TopicView {
     private Integer id;
 
     /**
-     * トピックを投稿した利用者
+     * コメントを投稿した利用者
      */
     private PostView post;
 
     /**
-     * トピックのタイトル
+     * コメントを投稿したトピック
+     */
+    private TopicView topic;
+
+    /**
+     * コメントの内容
      */
     private String title;
 
