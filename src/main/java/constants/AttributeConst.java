@@ -37,6 +37,7 @@ public enum AttributeConst {
     TOP_COUNT("topics_count"),
     TOP_ID("id"),
     TOP_TITLE("title"),
+    TOP_ERR("topicError"),
 
     //コメント管理
     COMMENT("comment"),

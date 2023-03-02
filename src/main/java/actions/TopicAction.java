@@ -97,7 +97,19 @@ public class TopicAction extends ActionBase {
                 putRequestScope(AttributeConst.TOPIC, rv);//入力されたトピック情報
                 putRequestScope(AttributeConst.ERR, errors);//エラーのリスト
 
-                //新規登録画面を再表示
+                //指定されたページ数の一覧画面に表示するトピックデータを取得
+                int page = getPage();
+                List<TopicView> topics = service.getAllPerPage(page);
+
+                //全トピックデータの件数を取得
+                long topicsCount = service.countAll();
+
+                putRequestScope(AttributeConst.TOPICS, topics); //取得したトピックデータ
+                putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全てのトピックデータの件数
+                putRequestScope(AttributeConst.PAGE, page); //ページ数
+                putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
+
+                //トップページを再表示
                 forward(ForwardConst.FW_TOP_INDEX);
 
             } else {
@@ -106,10 +118,27 @@ public class TopicAction extends ActionBase {
                 //セッションに登録完了のフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
 
-                //一覧画面にリダイレクト
+                //トップページにリダイレクト
                 redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
             }
         }
     }
 
+//    /**
+//     * トピックテーブルの取得を行う
+//     * @throws ServletException
+//     * @throws IOException
+//     */
+//    public void getTopictable() throws ServletException, IOException {
+//    //指定されたページ数の一覧画面に表示する日報データを取得
+//    int page = getPage();
+//    List<TopicView> topics = service.getAllPerPage(page);
+//
+//    //全日報データの件数を取得
+//    long topicsCount = service.countAll();
+//    putRequestScope(AttributeConst.TOPICS, topics); //取得した日報データ
+//    putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全ての日報データの件数
+//    putRequestScope(AttributeConst.PAGE, page); //ページ数
+//    putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
+//    }
 }

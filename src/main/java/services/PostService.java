@@ -7,8 +7,11 @@ import javax.persistence.NoResultException;
 
 import actions.views.PostConverter;
 import actions.views.PostView;
+import actions.views.TopicConverter;
+import actions.views.TopicView;
 import constants.JpaConst;
 import models.Post;
+import models.Topic;
 import models.validators.PostValidator;
 import utils.EncryptUtil;
 
@@ -152,5 +155,29 @@ public class PostService extends ServiceBase {
         em.getTransaction().begin();
         em.persist(PostConverter.toModel(ev));
         em.getTransaction().commit();
+    }
+
+    /**
+     * 指定されたページ数の一覧画面に表示するトピックデータを取得し、TopicViewのリストで返却する
+     * @param page ページ数
+     * @return 一覧画面に表示するデータのリスト
+     */
+    public List<TopicView> getAllPerPage(int page) {
+
+        List<Topic> topics = em.createNamedQuery(JpaConst.Q_TOP_GET_ALL, Topic.class)
+                .setFirstResult(JpaConst.ROW_PER_PAGE_TOPIC * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE_TOPIC)
+                .getResultList();
+        return TopicConverter.toViewList(topics);
+    }
+
+    /**
+     * トピックテーブルのデータの件数を取得し、返却する
+     * @return データの件数
+     */
+    public long countAll() {
+        long topics_count = (long) em.createNamedQuery(JpaConst.Q_TOP_COUNT, Long.class)
+                .getSingleResult();
+        return topics_count;
     }
 }

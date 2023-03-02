@@ -1,6 +1,7 @@
 package actions;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -8,6 +9,7 @@ import actions.views.PostView;
 import actions.views.TopicView;
 import constants.AttributeConst;
 import constants.ForwardConst;
+import constants.JpaConst;
 import constants.MessageConst;
 import constants.PropertyConst;
 import services.PostService;
@@ -85,6 +87,17 @@ public class AuthAction extends ActionBase {
                 putSessionScope(AttributeConst.LOGIN_POS, ev);
                 //セッションにログイン完了のフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGINED.getMessage());
+
+                //指定されたページ数の一覧画面に表示する日報データを取得
+                int page = getPage();
+                List<TopicView> topics = service.getAllPerPage(page);
+
+                //全日報データの件数を取得
+                long topicsCount = service.countAll();
+                putRequestScope(AttributeConst.TOPICS, topics); //取得した日報データ
+                putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全ての日報データの件数
+                putRequestScope(AttributeConst.PAGE, page); //ページ数
+                putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
 
                 //トップページ画面を表示
                 forward(ForwardConst.FW_TOP_INDEX);
