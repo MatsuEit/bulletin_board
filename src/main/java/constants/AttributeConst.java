@@ -45,7 +45,8 @@ public enum AttributeConst {
     COM_COUNT("comments_count"),
     COM_ID("id"),
     COM_DATETIME("comment_datetime"),
-    COM_MSG("msg"),
+    COM_TITLE("title"),
+    COM_ERR("topicError"),
     COM_like("like");
 
     private final String text;

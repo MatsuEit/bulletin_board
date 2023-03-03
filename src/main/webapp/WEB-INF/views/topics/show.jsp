@@ -5,29 +5,53 @@
 
 <c:set var="action" value="${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
+<c:set var="actTop" value="${ForwardConst.ACT_TOPI.getValue()}" />
+<c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
+            <c:if test="${topicError}">
+            <div id="flush_error">
+                トピック内容を入力してください。
+            </div>
+        </c:if>
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
 
-        <h2>トピック 詳細ページ</h2>
+        <h2><c:out value="${topic.title}" /></h2>
 
-        <table>
+        <table id="comment_list">
             <tbody>
                 <tr>
-                    <th>投稿者</th>
-                    <td><c:out value="${topic.post.name}" /></td>
+                    <th class="comment_id">ID</th>
+                    <th class="comment_title">コメント内容</th>
+                    <th class="comment_name">投稿者</th>
+                    <th class="comment_date">投稿日時</th>
                 </tr>
-                <tr>
-                    <th>登録日時</th>
-                    <fmt:parseDate value="${topic.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date" />
-                    <td><fmt:formatDate value="${createDay}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                </tr>
-                <tr>
+                <c:forEach var="comment" items="${comments}"
+                    varStatus="status">
+                    <tr class="row${status.count % 2}">
+                        <td class="comment_id">
+                        <td class="comment_title">
+                        <td class="comment_name"><c:out
+                                value="${comment.post.name}" /></td>
+                        <fmt:parseDate value="${comment.createdAt}"
+                            pattern="yyyy-MM-dd'T'HH:mm:ss"
+                            var="createDay" type="date" />
+                        <td class="comment_date"><fmt:formatDate
+                                value='${createDay}'
+                                pattern='yyyy-MM-dd HH:mm:ss' /></td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
 
         <p>
-            <a href="<c:url value='?action=${action}&command=${commIdx}' />">トップページに戻る</a>
+            <a
+                href="<c:url value='?action=${actTop}&command=${commIdx}' />">トップページに戻る</a>
         </p>
     </c:param>
 </c:import>

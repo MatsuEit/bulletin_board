@@ -28,13 +28,13 @@ public enum ForwardConst {
     CMD_DESTROY("destroy"),
 
     //jsp
-    FW_ERR_UNKNOWN("error/unknown"),
     FW_TOP_INDEX("topPage/index"),
-    FW_TOPI_SHOW("topics/show"),
     FW_LOGIN("login/login"),
     FW_POS_INDEX("posts/index"),
-    FW_POS_NEW("posts/new");
-
+    FW_POS_NEW("posts/new"),
+    FW_TOPI_SHOW("topics/show"),
+    FW_COM_NEW("comments/new"),
+    FW_ERR_UNKNOWN("error/unknown");
 
     /**
      * 文字列
