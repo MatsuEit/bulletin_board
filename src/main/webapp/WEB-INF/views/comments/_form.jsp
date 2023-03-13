@@ -4,11 +4,13 @@
 <%@ page import="models.Topic"%>
 <%@ page import="constants.AttributeConst"%>
 
+<textarea name="${AttributeConst.COM_TITLE.getValue()}"
+    id="${AttributeConst.COM_TITLE.getValue()}" rows="10" cols="50">${comment.title}</textarea>
 
-<input type="text" name="${AttributeConst.TOP_TITLE.getValue()}"
-    id="${AttributeConst.TOP_TITLE.getValue()}" value="${topic.title}" />
+<input type="hidden" name="${AttributeConst.COM_ID.getValue()}"
+    value="${comment.id}" />
 <input type="hidden" name="${AttributeConst.TOP_ID.getValue()}"
     value="${topic.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}"
     value="${_token}" />
-<button type="submit">新規トピック投稿</button>
+<button type="submit">コメント投稿</button>

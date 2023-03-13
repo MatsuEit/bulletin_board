@@ -21,11 +21,11 @@ public class CommentService extends ServiceBase {
      */
     public List<CommentView> getAllPerPage(int page) {
 
-        List<Comment> Comments = em.createNamedQuery(JpaConst.Q_TOP_GET_ALL, Comment.class)
+        List<Comment> topics = em.createNamedQuery(JpaConst.Q_COM_GET_ALL, Comment.class)
                 .setFirstResult(JpaConst.ROW_PER_PAGE_COMMENT * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE_COMMENT)
                 .getResultList();
-        return CommentConverter.toViewList(Comments);
+        return CommentConverter.toViewList(topics);
     }
 
     /**
@@ -33,9 +33,9 @@ public class CommentService extends ServiceBase {
      * @return データの件数
      */
     public long countAll() {
-        long Comments_count = (long) em.createNamedQuery(JpaConst.Q_TOP_COUNT, Long.class)
+        long topics_count = (long) em.createNamedQuery(JpaConst.Q_COM_COUNT, Long.class)
                 .getSingleResult();
-        return Comments_count;
+        return topics_count;
     }
 
     /**

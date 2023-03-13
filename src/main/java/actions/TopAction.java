@@ -35,6 +35,19 @@ public class TopAction extends ActionBase {
     }
 
     /**
+     * トピックデータを取得
+     * @param page ページ数
+     */
+    private void setContents(int page) {
+        List<TopicView> topics = service.getAllPerPage(page); //指定されたページ数の一覧画面に表示する日報データを取得
+        long topicsCount = service.countAll();        //全日報データの件数を取得
+        putRequestScope(AttributeConst.TOPICS, topics); //取得した日報データ
+        putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全ての日報データの件数
+        putRequestScope(AttributeConst.PAGE, page); //ページ数
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
+    }
+
+    /**
      * 一覧画面を表示する
      */
     public void index() throws ServletException, IOException {
@@ -44,14 +57,7 @@ public class TopAction extends ActionBase {
 
         //指定されたページ数の一覧画面に表示する日報データを取得
         int page = getPage();
-        List<TopicView> topics = service.getAllPerPage(page);
-
-        //全日報データの件数を取得
-        long topicsCount = service.countAll();
-        putRequestScope(AttributeConst.TOPICS, topics); //取得した日報データ
-        putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全ての日報データの件数
-        putRequestScope(AttributeConst.PAGE, page); //ページ数
-        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
+        setContents(page);
 
         //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
         String flush = getSessionScope(AttributeConst.FLUSH);
@@ -99,14 +105,7 @@ public class TopAction extends ActionBase {
 
                 //指定されたページ数の一覧画面に表示する日報データを取得
                 int page = getPage();
-                List<TopicView> topics = service.getAllPerPage(page);
-
-                //全日報データの件数を取得
-                long topicsCount = service.countAll();
-                putRequestScope(AttributeConst.TOPICS, topics); //取得した日報データ
-                putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全ての日報データの件数
-                putRequestScope(AttributeConst.PAGE, page); //ページ数
-                putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
+                setContents(page);
 
                 //登録失敗エラーメッセージ表示フラグをたてる
                 putRequestScope(AttributeConst.TOP_ERR, true);
@@ -122,17 +121,10 @@ public class TopAction extends ActionBase {
 
                 //指定されたページ数の一覧画面に表示する日報データを取得
                 int page = getPage();
-                List<TopicView> topics = service.getAllPerPage(page);
-
-                //全日報データの件数を取得
-                long topicsCount = service.countAll();
-                putRequestScope(AttributeConst.TOPICS, topics); //取得した日報データ
-                putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全ての日報データの件数
-                putRequestScope(AttributeConst.PAGE, page); //ページ数
-                putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
+                setContents(page);
 
                 //一覧画面を再表示
-                forward(ForwardConst.FW_TOP_INDEX);
+                redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
             }
 
 

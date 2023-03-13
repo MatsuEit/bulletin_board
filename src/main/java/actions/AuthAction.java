@@ -68,7 +68,6 @@ public class AuthAction extends ActionBase {
         String plainPass = getRequestParam(AttributeConst.POS_PASS);
         String pepper = getContextScope(PropertyConst.PEPPER);
 
-
         //有効な利用者か認証する
         Boolean isValidPost = service.validateLogin(name, plainPass, pepper);
 

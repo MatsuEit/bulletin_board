@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -65,6 +66,7 @@ public class Comment {
     /**
      * コメントの内容
      */
+    @Lob
     @Column(name = JpaConst.COM_COL_TITLE, length = 255, nullable = false)
     private String title;
 

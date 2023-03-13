@@ -5,6 +5,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>models.Topic</class>
         <class>models.Post</class>
+        <class>models.Comment</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="create" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />

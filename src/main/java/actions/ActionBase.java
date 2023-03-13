@@ -113,6 +113,29 @@ public abstract class ActionBase {
         response.sendRedirect(redirectUrl);
     }
 
+    //リダイレクトでID含めた引数3つのパターンで作りたい！！
+//    /**
+//     * 指定されたトピックIDのトピック詳細画面に遷移する
+//     * @param topicId 表示するトピックのID
+//     * @throws ServletException
+//     * @throws IOException
+//     */
+//    public void showTopicDetail(int topicId) throws ServletException, IOException {
+//        //トピック情報を取得
+//        TopicView tv = service.findOne(topicId);
+//        putRequestScope(AttributeConst.TOPIC, tv);
+//
+//        //指定されたページ数の一覧画面に表示するコメントデータを取得
+//        int page = getPage();
+//        setCommentViewListTo(page);
+//
+//        // トピック詳細画面に遷移
+//        forward(ForwardConst.FW_TOPI_SHOW);
+//    }
+//    // トピック詳細画面に遷移
+//    showTopicDetail(rv.getTopic().getId());
+
+
     /**
      * CSRF対策 token不正の場合はエラー画面を表示
      * @return true: token有効 false: token不正

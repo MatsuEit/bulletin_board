@@ -38,6 +38,7 @@ public enum AttributeConst {
     TOP_ID("id"),
     TOP_TITLE("title"),
     TOP_ERR("topicError"),
+    TOP_IN("topic_in"),
 
     //コメント管理
     COMMENT("comment"),
@@ -46,7 +47,7 @@ public enum AttributeConst {
     COM_ID("id"),
     COM_DATETIME("comment_datetime"),
     COM_TITLE("title"),
-    COM_ERR("topicError"),
+    COM_ERR("commentError"),
     COM_like("like");
 
     private final String text;

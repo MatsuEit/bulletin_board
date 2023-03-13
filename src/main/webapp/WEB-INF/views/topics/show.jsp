@@ -10,9 +10,9 @@
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-            <c:if test="${topicError}">
+            <c:if test="${commentError}">
             <div id="flush_error">
-                トピック内容を入力してください。
+                コメント内容を入力してください。
             </div>
         </c:if>
         <c:if test="${flush != null}">
@@ -48,10 +48,18 @@
                 </c:forEach>
             </tbody>
         </table>
-
+        <br />
+        <br />
+  <p>${topic.id}</p> <!-- 変数の中身を表示 -->
+                <br />
+        <br />
+        <form method="POST"
+            action="<c:url value='?action=${actTop}&command=${commCrt}&id=${topic.id}' />">
+            <c:import url="../comments/_form.jsp" />
+        </form>
         <p>
             <a
-                href="<c:url value='?action=${actTop}&command=${commIdx}' />">トップページに戻る</a>
+                href="<c:url value='?action=${action}&command=${commIdx}' />">トップページに戻る</a>
         </p>
     </c:param>
 </c:import>
