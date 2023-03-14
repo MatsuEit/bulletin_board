@@ -145,6 +145,9 @@ public class TopicAction extends ActionBase {
             //コメント情報登録
             List<String> errors = comservice.create(rv);
 
+            //トピックのid番号を取得
+            int tid = toNumber(getRequestParam(AttributeConst.TOP_ID));
+
             if (errors.size() > 0) {
                 //登録中にエラーがあった場合
 
@@ -160,7 +163,7 @@ public class TopicAction extends ActionBase {
                 putRequestScope(AttributeConst.COM_ERR, true);
 
                 // トピック詳細画面に遷移
-                forward(ForwardConst.FW_TOPI_SHOW);
+                forward(ForwardConst.FW_TOPI_SHOW, tid);
 
             } else {
                 //登録中にエラーがなかった場合
@@ -173,7 +176,8 @@ public class TopicAction extends ActionBase {
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_NEW_COMMENT.getMessage());
 
                 // トピック詳細画面に遷移
-                forward(ForwardConst.FW_TOPI_SHOW);
+
+                redirect(ForwardConst.ACT_TOPI, ForwardConst.CMD_SHOW, tid);
             }
         }
     }

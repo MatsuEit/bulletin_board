@@ -94,6 +94,28 @@ public abstract class ActionBase {
     }
 
     /**
+     * 指定されたjspの呼び出しを行う
+     * @param target 遷移先jsp画面のファイル名(拡張子を含まない)
+     * @param id フォワード先に渡すidの値
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void forward(ForwardConst target, int id) throws ServletException, IOException {
+
+        // jspファイルの相対パスを作成
+        String forward = String.format("/WEB-INF/views/%s.jsp", target.getValue());
+
+        // フォワード先のURLにクエリパラメータとしてidを追加する
+        forward += String.format("?id=%d", id);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+
+        // jspファイルの呼び出し
+        dispatcher.forward(request, response);
+
+    }
+
+    /**
      * URLを構築しリダイレクトを行う
      * @param action パラメータに設定する値
      * @param command パラメータに設定する値
@@ -113,28 +135,27 @@ public abstract class ActionBase {
         response.sendRedirect(redirectUrl);
     }
 
-    //リダイレクトでID含めた引数3つのパターンで作りたい！！
-//    /**
-//     * 指定されたトピックIDのトピック詳細画面に遷移する
-//     * @param topicId 表示するトピックのID
-//     * @throws ServletException
-//     * @throws IOException
-//     */
-//    public void showTopicDetail(int topicId) throws ServletException, IOException {
-//        //トピック情報を取得
-//        TopicView tv = service.findOne(topicId);
-//        putRequestScope(AttributeConst.TOPIC, tv);
-//
-//        //指定されたページ数の一覧画面に表示するコメントデータを取得
-//        int page = getPage();
-//        setCommentViewListTo(page);
-//
-//        // トピック詳細画面に遷移
-//        forward(ForwardConst.FW_TOPI_SHOW);
-//    }
-//    // トピック詳細画面に遷移
-//    showTopicDetail(rv.getTopic().getId());
+    /**
+     * idありのURLを構築しリダイレクトを行う
+     * @param action パラメータに設定する値
+     * @param command パラメータに設定する値
+     * @param id パラメータに設定する値
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void redirect(ForwardConst action, ForwardConst command, int id)
+            throws ServletException, IOException {
 
+        //URLを構築
+        String redirectUrl = request.getContextPath() + "/?action=" + action.getValue();
+        if (command != null) {
+            redirectUrl = redirectUrl + "&command=" + command.getValue();
+        }
+        redirectUrl = redirectUrl + "&id=" + id;
+
+        //URLへリダイレクト
+        response.sendRedirect(redirectUrl);
+    }
 
     /**
      * CSRF対策 token不正の場合はエラー画面を表示
