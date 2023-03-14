@@ -48,6 +48,7 @@ public interface JpaConst {
     String JPQL_PARM_NAME = "name"; //名前
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_POST = "post"; //
+    String JPQL_PARM_TOPIC = "topic"; //
 
     //NamedQueryの nameとquery
     //全ての利用者をidの降順に取得する
@@ -76,4 +77,11 @@ public interface JpaConst {
     //全てのコメントの件数を取得する
     String Q_COM_COUNT = ENTITY_COM + ".count";
     String Q_COM_COUNT_DEF = "SELECT COUNT(r) FROM Comment AS r";
+    //指定したトピック内のコメントデータを全件idの降順で取得する
+    String Q_COM_GET_ALL_MINE = ENTITY_COM + ".getAllMine";
+    String Q_COM_GET_ALL_MINE_DEF = "SELECT r FROM Comment AS r WHERE r.topic = :" + JPQL_PARM_TOPIC + " ORDER BY r.id DESC";
+    //指定したトピック内のコメントデータ件数を取得する
+    String Q_COM_COUNT_ALL_MINE = ENTITY_COM + ".countAllMine";
+    String Q_COM_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Comment AS r WHERE r.topic = :" + JPQL_PARM_TOPIC;
+
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import actions.views.CommentConverter;
 import actions.views.CommentView;
+import actions.views.TopicConverter;
+import actions.views.TopicView;
 import constants.JpaConst;
 import models.Comment;
 import models.validators.CommentValidator;
@@ -13,6 +15,36 @@ import models.validators.CommentValidator;
  * コメントテーブルの操作に関わる処理を行うクラス
  */
 public class CommentService extends ServiceBase {
+
+    /**
+     * 指定したトピック内のコメントデータを、指定されたページ数の一覧画面に表示する分取得しCommentViewのリストで返却する
+     * @param topic トピック
+     * @param page ページ数
+     * @return 一覧画面に表示するデータのリスト
+     */
+    public List<CommentView> getMinePerPage(TopicView topic, int page) {
+
+        List<Comment> comments = em.createNamedQuery(JpaConst.Q_COM_GET_ALL_MINE, Comment.class)
+                .setParameter(JpaConst.JPQL_PARM_TOPIC, TopicConverter.toModel(topic))
+                .setFirstResult(JpaConst.ROW_PER_PAGE_COMMENT * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE_COMMENT)
+                .getResultList();
+        return CommentConverter.toViewList(comments);
+    }
+
+    /**
+     * 指定したトピック内のコメントデータの件数を取得し、返却する
+     * @param topic
+     * @return コメントデータの件数
+     */
+    public long countAllMine(TopicView topic) {
+
+        long count = (long) em.createNamedQuery(JpaConst.Q_COM_COUNT_ALL_MINE, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_TOPIC, TopicConverter.toModel(topic))
+                .getSingleResult();
+
+        return count;
+    }
 
     /**
      * 指定されたページ数の一覧画面に表示するコメントデータを取得し、CommentViewのリストで返却する

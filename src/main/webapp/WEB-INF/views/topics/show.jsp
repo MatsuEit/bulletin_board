@@ -34,8 +34,10 @@
                 <c:forEach var="comment" items="${comments}"
                     varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="comment_id">
-                        <td class="comment_title">
+                        <td class="comment_id"><c:out
+                                value="${comment.id}" /></td>
+                        <td class="comment_title"><c:out
+                                value="${comment.title}" /></td>
                         <td class="comment_name"><c:out
                                 value="${comment.post.name}" /></td>
                         <fmt:parseDate value="${comment.createdAt}"
@@ -49,9 +51,6 @@
             </tbody>
         </table>
         <br />
-        <br />
-  <p>${topic.id}</p> <!-- 変数の中身を表示 -->
-                <br />
         <br />
         <form method="POST"
             action="<c:url value='?action=${actTop}&command=${commCrt}&id=${topic.id}' />">

@@ -10,6 +10,5 @@
     <c:param name="content">
         <h2>お探しのページは見つかりませんでした。</h2>
         <p><a href="<c:url value='?action=${actTop}&command=${commIdx}' />">トップページに戻る</a></p>
-        <c:out value="${topic.post.name}" />
     </c:param>
 </c:import>

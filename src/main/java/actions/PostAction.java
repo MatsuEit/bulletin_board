@@ -108,7 +108,7 @@ public class PostAction extends ActionBase {
                 //登録中にエラーがなかった場合
 
                 //セッションに登録完了のフラッシュメッセージを設定
-                putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_NEW_POST.getMessage());
 
                 //ログイン画面にリダイレクト
                 redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);

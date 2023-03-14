@@ -44,8 +44,9 @@ public class TopicAction extends ActionBase {
      * @throws IOException
      */
     private void setCommentViewListTo(int page) {
-        List<CommentView> comments = comservice.getAllPerPage(page); //指定されたページ数の一覧画面に表示するコメントデータを取得
-        long commentsCount = comservice.countAll();  // 全コメントデータの件数を取得
+        TopicView tv = service.findOne(toNumber(getRequestParam(AttributeConst.TOP_ID)));  //トピック情報を取得
+        List<CommentView> comments = comservice.getMinePerPage(tv, page); //指定されたページ数の一覧画面に表示するコメントデータを取得
+        long commentsCount = comservice.countAllMine(tv);  // 全コメントデータの件数を取得
         putRequestScope(AttributeConst.COMMENTS, comments); // 取得したコメントデータ
         putRequestScope(AttributeConst.COM_COUNT, commentsCount); // 全てのコメントデータの件数
         putRequestScope(AttributeConst.PAGE, page); // ページ数
@@ -56,6 +57,7 @@ public class TopicAction extends ActionBase {
      * 一覧画面を表示する
      */
     public void index() throws ServletException, IOException {
+
         //CSRF対策用トークンを設定
         putRequestScope(AttributeConst.TOKEN, getTokenId());
         putRequestScope(AttributeConst.TOPIC, new TopicView()); //空のトピックインスタンス
@@ -83,6 +85,36 @@ public class TopicAction extends ActionBase {
     }
 
     /**
+     * トピック内容を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void show() throws ServletException, IOException {
+
+        //CSRF対策用トークンを設定
+        putRequestScope(AttributeConst.TOKEN, getTokenId());
+
+        //idを条件にトピックデータを取得する
+        TopicView rv = service.findOne(toNumber(getRequestParam(AttributeConst.TOP_ID)));
+
+        if (rv == null) {
+            //該当のトピックデータが存在しない場合はエラー画面を表示
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+
+        } else {
+
+            putRequestScope(AttributeConst.TOPIC, rv); //取得したトピックデータ
+
+            //指定されたページ数の一覧画面に表示するコメントデータを取得
+            int page = getPage();
+            setCommentViewListTo(page);
+
+            //トピック内容を表示
+            forward(ForwardConst.FW_TOPI_SHOW);
+        }
+    }
+
+    /**
      * コメントの作成を行う
      * @throws ServletException
      * @throws IOException
@@ -91,9 +123,9 @@ public class TopicAction extends ActionBase {
 
         //CSRF対策 tokenのチェック
         if (checkToken()) {
+
             //CSRF対策用トークンを設定
             putRequestScope(AttributeConst.TOKEN, getTokenId());
-
             //セッションからログイン中の利用者情報を取得
             PostView ev = (PostView) getSessionScope(AttributeConst.LOGIN_POS);
 
@@ -138,35 +170,11 @@ public class TopicAction extends ActionBase {
                 setCommentViewListTo(page);
 
                 //セッションに登録完了のフラッシュメッセージを設定
-                putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_NEW_COMMENT.getMessage());
 
                 // トピック詳細画面に遷移
                 forward(ForwardConst.FW_TOPI_SHOW);
             }
         }
     }
-
-    /**
-     * トピック内容を表示する
-     * @throws ServletException
-     * @throws IOException
-     */
-    public void show() throws ServletException, IOException {
-
-        //idを条件にトピックデータを取得する
-        TopicView rv = service.findOne(toNumber(getRequestParam(AttributeConst.TOP_ID)));
-
-        if (rv == null) {
-            //該当のトピックデータが存在しない場合はエラー画面を表示
-            forward(ForwardConst.FW_ERR_UNKNOWN);
-
-        } else {
-
-            putRequestScope(AttributeConst.TOPIC, rv); //取得したトピックデータ
-
-            //トピック内容を表示
-            forward(ForwardConst.FW_TOPI_SHOW);
-        }
-    }
-
 }

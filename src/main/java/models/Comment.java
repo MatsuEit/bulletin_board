@@ -32,6 +32,12 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_COM_COUNT,
             query = JpaConst.Q_COM_COUNT_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_COM_GET_ALL_MINE,
+            query = JpaConst.Q_COM_GET_ALL_MINE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_COM_COUNT_ALL_MINE,
+            query = JpaConst.Q_COM_COUNT_ALL_MINE_DEF)
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -67,7 +73,7 @@ public class Comment {
      * コメントの内容
      */
     @Lob
-    @Column(name = JpaConst.COM_COL_TITLE, length = 255, nullable = false)
+    @Column(name = JpaConst.COM_COL_TITLE, nullable = false)
     private String title;
 
     /**

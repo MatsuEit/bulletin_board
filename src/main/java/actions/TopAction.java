@@ -126,9 +126,6 @@ public class TopAction extends ActionBase {
                 //一覧画面を再表示
                 redirect(ForwardConst.ACT_TOP, ForwardConst.CMD_INDEX);
             }
-
-
         }
-
     }
 }
