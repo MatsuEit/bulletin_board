@@ -94,28 +94,6 @@ public abstract class ActionBase {
     }
 
     /**
-     * 指定されたjspの呼び出しを行う
-     * @param target 遷移先jsp画面のファイル名(拡張子を含まない)
-     * @param id フォワード先に渡すidの値
-     * @throws ServletException
-     * @throws IOException
-     */
-    protected void forward(ForwardConst target, int id) throws ServletException, IOException {
-
-        // jspファイルの相対パスを作成
-        String forward = String.format("/WEB-INF/views/%s.jsp", target.getValue());
-
-        // フォワード先のURLにクエリパラメータとしてidを追加する
-        forward += String.format("?id=%d", id);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-
-        // jspファイルの呼び出し
-        dispatcher.forward(request, response);
-
-    }
-
-    /**
      * URLを構築しリダイレクトを行う
      * @param action パラメータに設定する値
      * @param command パラメータに設定する値

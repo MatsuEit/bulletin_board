@@ -54,37 +54,6 @@ public class TopicAction extends ActionBase {
     }
 
     /**
-     * 一覧画面を表示する
-     */
-    public void index() throws ServletException, IOException {
-
-        //CSRF対策用トークンを設定
-        putRequestScope(AttributeConst.TOKEN, getTokenId());
-        putRequestScope(AttributeConst.TOPIC, new TopicView()); //空のトピックインスタンス
-
-        //指定されたページ数の一覧画面に表示するトピックデータを取得
-        int page = getPage();
-        List<TopicView> topics = service.getAllPerPage(page);
-
-        //全トピックデータの件数を取得
-        long topicsCount = service.countAll();
-        putRequestScope(AttributeConst.TOPICS, topics); //取得したトピックデータ
-        putRequestScope(AttributeConst.TOP_COUNT, topicsCount); //全てのトピックデータの件数
-        putRequestScope(AttributeConst.PAGE, page); //ページ数
-        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE_TOPIC); //1ページに表示するレコードの数
-
-        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
-        String flush = getSessionScope(AttributeConst.FLUSH);
-        if (flush != null) {
-            putRequestScope(AttributeConst.FLUSH, flush);
-            removeSessionScope(AttributeConst.FLUSH);
-        }
-
-        //一覧画面を表示
-        forward(ForwardConst.FW_TOP_INDEX);
-    }
-
-    /**
      * トピック内容を表示する
      * @throws ServletException
      * @throws IOException
@@ -95,19 +64,23 @@ public class TopicAction extends ActionBase {
         putRequestScope(AttributeConst.TOKEN, getTokenId());
 
         //idを条件にトピックデータを取得する
-        TopicView rv = service.findOne(toNumber(getRequestParam(AttributeConst.TOP_ID)));
+        TopicView tv = service.findOne(toNumber(getRequestParam(AttributeConst.TOP_ID)));
+        putRequestScope(AttributeConst.TOPIC, tv); //トピック情報を持ったコメントインスタンスをセット
 
-        if (rv == null) {
+        //セッションにフラッシュメッセージが設定されている場合はリクエストスコープに移し替え、セッションからは削除する
+        String flush = getSessionScope(AttributeConst.FLUSH);
+        if (flush != null) {
+            putRequestScope(AttributeConst.FLUSH, flush);
+            removeSessionScope(AttributeConst.FLUSH);
+        }
+
+        if (tv == null) {
             //該当のトピックデータが存在しない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
         } else {
-
-            putRequestScope(AttributeConst.TOPIC, rv); //取得したトピックデータ
-
             //指定されたページ数の一覧画面に表示するコメントデータを取得
-            int page = getPage();
-            setCommentViewListTo(page);
+            setCommentViewListTo(getPage());
 
             //トピック内容を表示
             forward(ForwardConst.FW_TOPI_SHOW);
@@ -133,50 +106,43 @@ public class TopicAction extends ActionBase {
             TopicView tv = service.findOne(toNumber(getRequestParam(AttributeConst.TOP_ID)));
 
             //パラメータの値をもとにコメント情報のインスタンスを作成する
-            CommentView rv = new CommentView(
+            CommentView cv = new CommentView(
                     null,
                     ev, //ログインしている利用者を、コメント作成者として登録する
                     tv,//投稿しているトピック情報を登録する
                     getRequestParam(AttributeConst.COM_TITLE),
                     null);
 
-            putRequestScope(AttributeConst.TOPIC, rv); //トピック情報を持ったコメントインスタンスをセット
-
+            putRequestScope(AttributeConst.TOPIC, cv); //トピック情報を持ったコメントインスタンスをセット
             //コメント情報登録
-            List<String> errors = comservice.create(rv);
+            List<String> errors = comservice.create(cv);
 
             //トピックのid番号を取得
             int tid = toNumber(getRequestParam(AttributeConst.TOP_ID));
+            putRequestScope(AttributeConst.TOP_ID ,tid);
+
+            //指定されたページ数の一覧画面に表示するコメントデータを取得
+            setCommentViewListTo(getPage());
 
             if (errors.size() > 0) {
                 //登録中にエラーがあった場合
 
-                putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-                putRequestScope(AttributeConst.TOPIC, rv);//入力されたコメント情報
-                putRequestScope(AttributeConst.ERR, errors);//エラーのリスト
-
-                //指定されたページ数の一覧画面に表示するコメントデータを取得
-                int page = getPage();
-                setCommentViewListTo(page);
+                putRequestScope(AttributeConst.ERR, errors); //エラーメッセージを設定
+                putRequestScope(AttributeConst.TOPIC, tv); //トピック情報をセット
 
                 //登録失敗エラーメッセージ表示フラグをたてる
                 putRequestScope(AttributeConst.COM_ERR, true);
 
-                // トピック詳細画面に遷移
-                forward(ForwardConst.FW_TOPI_SHOW, tid);
+                //トピック詳細画面に遷移
+                forward(ForwardConst.FW_TOPI_SHOW);
 
             } else {
                 //登録中にエラーがなかった場合
 
-                //指定されたページ数の一覧画面に表示するコメントデータを取得
-                int page = getPage();
-                setCommentViewListTo(page);
-
                 //セッションに登録完了のフラッシュメッセージを設定
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_NEW_COMMENT.getMessage());
 
-                // トピック詳細画面に遷移
-
+                //トピック詳細画面に遷移
                 redirect(ForwardConst.ACT_TOPI, ForwardConst.CMD_SHOW, tid);
             }
         }

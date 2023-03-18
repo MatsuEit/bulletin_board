@@ -6,7 +6,7 @@
 
 
 <input type="text" name="${AttributeConst.TOP_TITLE.getValue()}"
-    id="${AttributeConst.TOP_TITLE.getValue()}" value="${topic.title}" />
+    id="${AttributeConst.TOP_TITLE.getValue()}" value="${topic.title}"style="width: 400px;" />
 <input type="hidden" name="${AttributeConst.TOP_ID.getValue()}"
     value="${topic.id}" />
 <input type="hidden" name="${AttributeConst.TOKEN.getValue()}"
