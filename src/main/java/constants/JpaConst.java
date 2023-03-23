@@ -12,8 +12,7 @@ public interface JpaConst {
     //トピックデータ取得件数の最大値
     int ROW_PER_PAGE_TOPIC = 15; //1ページに表示するレコードの数
     //コメントデータ取得件数の最大値
-//    int ROW_PER_PAGE_COMMENT = 50; //1ページに表示するレコードの数
-    int ROW_PER_PAGE_COMMENT = 10; //1ページに表示するレコードの数
+    int ROW_PER_PAGE_COMMENT = 50; //1ページに表示するレコードの数
 
     //利用者テーブル
     String TABLE_POS = "posts"; //テーブル名

@@ -21,22 +21,21 @@
 <body>
     <div id="wrapper">
         <div id="header">
-            <div id="header_menu">
+            <div id="logo">
                 <h1>
                     <a href="<c:url value='/?action=${actTop}&command=${commIdx}' />">掲示板</a>
                 </h1>
-                &nbsp;&nbsp;&nbsp;
             </div>
             <c:choose>
                 <c:when test="${sessionScope.login_post != null}">
-                    <div id="post_name">
-                        <c:out value="${sessionScope.login_post.name}" />
-                        &nbsp;さん&nbsp;&nbsp;&nbsp; <a href="<c:url value='?action=${actAuth}&command=${commOut}' />">ログアウト</a>
+                    <div id="post_set">
+                            <c:out value="${sessionScope.login_post.name}" />
+                            &nbsp;さん&nbsp;&nbsp;&nbsp; <a href="<c:url value='?action=${actAuth}&command=${commOut}' />">ログアウト</a>
                     </div>
                 </c:when>
                 <c:when test="${sessionScope.login_post == null}">
-                    <div id="post_new">
-                        <a href="<c:url value='?action=${actPos}&command=${commNew}' />">アカウント作成</a>
+                    <div id="post_set">
+                            <a href="<c:url value='?action=${actPos}&command=${commNew}' />">アカウント作成</a>
                     </div>
                 </c:when>
             </c:choose>

@@ -34,7 +34,6 @@
                 </div>
             </div>
         </c:forEach>
-<img src="./img/bg-header.jpg" alt="サンプル写真">
         <br />
         <div id="pagination">
             （全 ${topics_count} 件）<br />

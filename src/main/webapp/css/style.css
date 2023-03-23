@@ -1,73 +1,114 @@
 @CHARSET "UTF-8";
 
-body {
-    color: #333333;
-    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+/* -------------------------------------------------------------
+
+[1] レイアウトに関する指定
+[2] ヘッダーブロック内に関する指定
+[3] コンテンツブロック内に関する指定
+[4] フッターブロック内に関する指定
+[5] CSSデザインサンプルリンク指定
+
+----------------------------------------------------------------
+CSSデザインサンプ [ URL ] http://www.css-designsample.com
+------------------------------------------------------------- */
+
+/* 一括で全ての要素の余白をゼロに指定 */
+* {
+    margin: 0;
+    padding: 0;
 }
 
+/* 全体的なリンク */
+a:link, a:visited, a:hover, a:active {
+    text-decoration: underline;
+}
+
+a:link {
+    color: #00f;
+}
+
+a:visited {
+    color: #90f;
+}
+
+a:hover {
+    color: #f00;
+}
+
+a:active {
+    color: #f00;
+}
+
+/* -------------------------------------------------------------
+   [1] レイアウトに関する指定 */
+body {
+    font-size: 100%;
+    text-align: center;
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka,
+        "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #d5ffd5;
+}
+
+/*-- 全体を囲んでいます --*/
+#wrapper {
+    text-align: left;
+    width: 800px;
+    margin: 0 auto;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+}
+
+/*-- ヘッダー部分 --*/
 #header {
     width: 100%;
-    height: 70px;
-    background-color: #333333;
+    height: 160px;
+    position: relative;
+    background: url("img/bg-header.jpg") ;
 }
 
-#content {
-    width: 94%;
-    margin-top: 15px;
+#header_menu {
+    width: 57%;
+    padding-top: 17px;
     padding-left: 3%;
+    display: inline-block;
 }
 
-h1 {
-    font-size: 24px;
-    display: inline;
+/*-- コンテンツ部分 740px --*/
+#content {
+    padding: 40px 30px;
 }
 
-h2 {
-    font-size: 36px;
-    margin-bottom: 15px;
-}
-
-li {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-p {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-a {
-    text-decoration: none;
-    color: #24738e;
-}
-
-table, tr, th, td {
-    border: 1px solid #cccccc;
-}
-
-table {
-    width: 100%;
-    table-layout: fixed;
-}
-
-th {
-    width: 26%;
-    padding: 10px 2%;
-}
-
-td {
-    width: 66%;
-    padding: 10px 2%;
-}
-
-button {
-    font-size: 14px;
-    padding: 5px 10px;
-}
-
+/*-- フッター部分 --*/
 #footer {
-    text-align: center;
+    width: 802px;
+    margin: 0 auto;
+    padding: 2em 0 0.5em;
+    background-color: #333;
+}
+
+#post_set {
+    color: #ff8000;
+    font-size: 120%;
+    width: 100%;
+    padding-right: 3%;
+    text-align: right;
+    display: inline-block;
+    background: url("img/bg-globalnavi.jpg") ;
+    position: absolute;
+    bottom: 0;
+}
+
+#post_set a{
+    font-weight: bold;
+    color: #ff8040;
+    text-decoration: none;
+}
+
+#post_set a:hover {
+    color: #f00;
+    text-decoration: none;
 }
 
 #flush_success {
@@ -77,7 +118,7 @@ button {
     padding-bottom: 28px;
     margin-bottom: 15px;
     color: #155724;
-    background-color: #d4edda;
+    background-color: #84ffff;
 }
 
 #flush_error {
@@ -90,54 +131,219 @@ button {
     background-color: #f8d7da;
 }
 
-#header_menu {
-    width: 57%;
-    padding-top: 17px;
-    padding-left: 3%;
-    display: inline-block;
+button {
+    font-size: 14px;
+    padding: 5px 10px;
 }
 
-#post_name {
-    color: #cccccc;
-    width: 36%;
-    padding-right: 3%;
-    text-align: right;
-    display: inline-block;
+.topic_title {
+    word-wrap: break-word;
 }
 
-#post_new {
-    color: #cccccc;
-    width: 36%;
-    padding-right: 3%;
-    text-align: right;
-    display: inline-block;
+.title_bg {
+    background-color: #e8ffff;
 }
 
-#header a {
-    color: #eeeeee;
+.comment_title {
+    word-wrap: break-word;
 }
 
-h1 a {
-    color: #eeeeee;
+.message {
+    background-color: #ffeddb;
 }
 
-table#topic_list th {
+/* -------------------------------------------------------------
+   [2] ヘッダーブロック内に関する指定 */
+
+/* サイトタイトル */
+#logo {
+    font-size: 150%;
+    padding: 20px;
+    top: 30px;
+    left: 30px;
+}
+
+#logo a {
     font-weight: bold;
-    padding: 10px 2%;
+    color: #000;
+    text-decoration: none;
 }
 
-table#topic_list .topic_name {
-    width: 20%;
-    padding: 10px 2%;
-}
-table#topic_list .topic_date {
-    width: 20%;
+#logo a:hover {
+    color: #f00;
+    text-decoration: none;
 }
 
-table#topic_list .topic_title {
-    width: 37%;
+/* 概要 */
+.description {
+    line-height: 1.5em;
+    position: absolute;
+    bottom: 45px;
+    left: 30px;
+    color: #000;
 }
 
-table#topic_list .topic_action {
-    width: 13%;
+/* 見出し */
+h1 {
+    font-weight: normal;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    color: #666;
+}
+/*---------------------------------------グローバルナビ部分*/
+#globalnavi {
+    font-size: 95%;
+    list-style-type: none;
+    width: 800px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#globalnavi li {
+    width: 200px;
+    float: left;
+}
+
+#globalnavi li a {
+    text-align: center;
+    text-decoration: none;
+    width: 200px;
+    height: 28px;
+    display: block;
+    padding-top: 12px;
+    background-image: url(img/bg-globalnavi.jpg);
+    background-repeat: no-repeat;
+    color: #9f0
+}
+
+#category01 a {
+    background-position: 0 0;
+}
+
+#category02 a {
+    background-position: -200px 0;
+}
+
+#category03 a {
+    background-position: -400px 0;
+}
+
+#category04 a {
+    background-position: -600px 0;
+}
+
+#globalnavi li a:hover {
+    text-decoration: none;
+    background-image: url(img/bg-globalnavi.jpg);
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+#category01 a:hover {
+    background-position: 0 -40px;
+}
+
+#category02 a:hover {
+    background-position: -200px -40px;
+}
+
+#category03 a:hover {
+    background-position: -400px -40px;
+}
+
+#category04 a:hover {
+    background-position: -600px -40px;
+}
+
+/*--サブメニュー部分--*/
+#globalnavi ul {
+    list-style-type: none;
+    width: 200px;
+    height: auto;
+    position: static;
+}
+
+#globalnavi ul li {
+    width: 200px;
+    float: none;
+}
+
+#globalnavi ul li a {
+    text-align: left;
+    text-decoration: none;
+    width: 190px;
+    height: auto;
+    display: block;
+    padding: 4px;
+    border: 1px outset #690;
+    background-image: none;
+    background-color: #690;
+    color: #000;
+}
+
+#globalnavi ul li a:hover {
+    text-decoration: none;
+    border: 1px outset #666;
+    background-image: none;
+    background-color: #666;
+    color: #fff;
+}
+
+#globalnavi .menu ul {
+    display: none;
+}
+
+#globalnavi .menuOn ul {
+    display: block;
+}
+
+/* -------------------------------------------------------------
+   [3] コンテンツブロック内に関する指定 */
+
+/* 見出し */
+h2, h3, h4, h5, h6 {
+    font-size: 150%;
+    font-weight: normal;
+    margin-bottom: 0.5em;
+    padding: 3px 0 2px;
+    color: #030;
+    border-top: 2px solid #9c0;
+    border-bottom: 1px solid #ccc;
+}
+
+h3, h4, h5, h6 {
+    margin-top: 2em;
+}
+
+/* 文字 */
+#content p {
+    line-height: 1.5em;
+    margin-bottom: 1em;
+}
+
+/* -------------------------------------------------------------
+   [5] フッターブロック内に関する指定 */
+#footer  {
+    text-align: center;
+    color: #fff;
+}
+
+/* -------------------------------------------------------------
+   [6] CSSデザインサンプルリンク指定 */
+#cds {
+    font-size: 80%;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    text-align: right;
+    margin: 0;
+    padding-right: 20px;
+    clear: both;
+}
+
+#cds, #cds a, #cds a:hover {
+    text-decoration: none;
+    color: #ccc;
 }
